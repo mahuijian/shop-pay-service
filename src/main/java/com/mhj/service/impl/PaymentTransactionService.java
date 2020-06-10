@@ -24,9 +24,9 @@ public class PaymentTransactionService {
 
         // 插入一条预支付记录
         // 支付全局id
-        String partyPayId = OrderCodeUtil.getAgainCode(paymentDTO.getUserId().longValue());
+        String orderId = OrderCodeUtil.getOrderCode(paymentDTO.getUserId().longValue());
         PaymentTransactionDTO paymentTransactionDTO = PaymentTransactionDTO.builder()
-                .orderId(OrderCodeUtil.getOrderCode(paymentDTO.getUserId().longValue()))
+                .orderId(orderId)
                 .payAmount(paymentDTO.getTotalPrice())
                 .userId(paymentDTO.getUserId())
                 .paymentId(OrderCodeUtil.getUserOrderCode(paymentDTO.getUserId().longValue()))
@@ -41,7 +41,7 @@ public class PaymentTransactionService {
         }
         // 生成token
         Map<String, Object> map = Maps.newHashMap();
-        map.put("orderId", partyPayId);
+        map.put("orderId", orderId);
         map.put("userId", paymentDTO.getUserId());
         map.put("totalPrice", paymentDTO.getTotalPrice());
         return JwtUtil.generateToken(map);
