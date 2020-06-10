@@ -4,8 +4,8 @@ import com.google.common.collect.Maps;
 import com.mhj.dto.PaymentDTO;
 import com.mhj.entity.PaymentTransactionDTO;
 import com.mhj.mapper.PaymentTransactionDao;
-import com.mhj.utils.IdWorkerUtil;
 import com.mhj.utils.JwtUtil;
+import com.mhj.utils.OrderCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +24,16 @@ public class PaymentTransactionService {
 
         // 插入一条预支付记录
         // 支付全局id
-        String orderId = IdWorkerUtil.nextId() + "";
+        String partyPayId = OrderCodeUtil.getAgainCode(paymentDTO.getUserId().longValue());
         PaymentTransactionDTO paymentTransactionDTO = PaymentTransactionDTO.builder()
-                .orderId(orderId)
+                .orderId(OrderCodeUtil.getOrderCode(paymentDTO.getUserId().longValue()))
                 .payAmount(paymentDTO.getTotalPrice())
                 .userId(paymentDTO.getUserId())
-                .paymentId(IdWorkerUtil.nextId().toString())
+                .paymentId(OrderCodeUtil.getUserOrderCode(paymentDTO.getUserId().longValue()))
+                .partyPayId(OrderCodeUtil.getAgainCode(paymentDTO.getUserId().longValue()))
                 .createTime(System.currentTimeMillis() / 1000)
                 .createUser(paymentDTO.getUserId())
+                .pevision(0)
                 .paymentStatus(0).build();
         Integer result = paymentTransactionDao.insertPaymentTransaction(paymentTransactionDTO);
         if (result == 0) {
@@ -39,7 +41,7 @@ public class PaymentTransactionService {
         }
         // 生成token
         Map<String, Object> map = Maps.newHashMap();
-        map.put("orderId", orderId);
+        map.put("orderId", partyPayId);
         map.put("userId", paymentDTO.getUserId());
         map.put("totalPrice", paymentDTO.getTotalPrice());
         return JwtUtil.generateToken(map);

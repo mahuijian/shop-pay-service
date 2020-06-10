@@ -27,7 +27,7 @@ public class PaymentTransactionDTO {
 
     private String paymentId;
 
-    private Integer partyPayId;
+    private String partyPayId;
 
     private Integer updateUser;
 
