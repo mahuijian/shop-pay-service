@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mhj.mapper.PaymentTransactionDao">
+
+    <insert id="insertPaymentTransaction" parameterType="com.mhj.entity.PaymentTransactionDTO">
+
+      INSERT INTO t_payment_transaction
+      (`pay_amount`, `payment_status`, `user_id`, `order_id`, `pevision`, `payment_id`, `party_pay_id`, `update_user`, `update_time`, `create_user`, `create_time`)
+      VALUES
+      (#{payAmount}, #{paymentStatus}, #{userId}, #{orderId}, #{pevision}, #{paymentId}, #{partyPayId}, #{updateUser}, #{updateTime}, #{createUser}, #{createTime});
+
+    </insert>
+
+    <update id="updateOrderStatus" parameterType="com.mhj.entity.PaymentTransactionDTO">
+       UPDATE t_payment_transaction
+       SET `payment_status` = #{paymentStatus},
+            `update_user` = #{updateUser},
+            `update_time`=#{updateTime}
+       WHERE
+          payment_id = #{paymentId};
+    </update>
+
+    <select id="queryPaymentTransaction" parameterType="string" resultType="com.mhj.entity.PaymentTransactionDTO">
+        SELECT
+            pay_amount payAmount,
+            payment_status paymentStatus,
+            payment_id paymentId
+        FROM
+            t_payment_transaction
+        WHERE payment_id = #{paymentId};
+    </select>
+
+</mapper>

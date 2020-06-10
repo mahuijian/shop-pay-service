@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mhj.mapper.PaymentTransactionLogDao">
+
+    <insert id="insertpaymentTransaction" parameterType="com.mhj.entity.PaymentTransactionLogDTO">
+
+      INSERT INTO `t_payment_transaction_log`
+      ( `synch_log`, `async_log`, `channel_id`, `transaction_id`, `revision`,
+      `create_user`, `create_time`, `update_time`, `update_user`)
+      VALUES (#{synchLog}, #{asyncLog}, #{channelId}, #{transactionId}, #{revision}, '11', '111111111', '111111111', '1');
+
+    </insert>
+
+</mapper>

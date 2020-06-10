@@ -1,0 +1,42 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.108.185.192:3306/bay_pay?roundRobinLoadBalance=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    filters: stat
+    #最大并发链接数
+    maxActive: 20
+    #初始化链接数
+    initialSize: 1
+    #链接等待超时时间
+    maxWait: 60000
+    #最小空闲连接数
+    minIdle: 1
+    #间隔多久才进行一次检测，检测需要关闭的空闲连接，单位:毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    #连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    logAbandoned: true
+  cache:
+    ehcache:
+      config: classpath:config/ehcache.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.mhj.entity
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

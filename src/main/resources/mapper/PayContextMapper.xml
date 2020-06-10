@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mhj.mapper.PayContextDao">
+
+    <select id="queryPaymentChannelByType" parameterType="integer" resultType="com.mhj.entity.PaymentChannelDTO">
+
+      SELECT
+        channel_name channelName,
+        channel_id channelId,
+        merchant_id merchantId,
+        sync_url syncUrl,
+        asyn_url asynurl,
+        public_key publicKey,
+        private_key privateKey,
+        resk_rate_info reskRateInfo
+      FROM
+        t_payment_channel
+      WHERE channel_type = #{channelType} and org_Id = #{orgId} and channel_status = 0
+
+    </select>
+
+    <select id="queryPaymentTransactionByOrderId" resultType="com.mhj.entity.PaymentTransactionDTO">
+
+        SELECT
+            pay_amount payAmount,
+            payment_status paymentStatus,
+            payment_id paymentId
+        FROM
+            t_payment_transaction
+        WHERE order_id = #{orderId};
+
+    </select>
+
+</mapper>
