@@ -26,8 +26,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("秒杀服务API")
-                .description("秒杀服务接口文档说明")
+                .title("支付服务API")
+                .description("支付服务接口文档说明")
                 .version("1.0.0")
                 .build();
     }
