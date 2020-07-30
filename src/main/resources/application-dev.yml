@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://39.108.185.192:3306/bay_pay?roundRobinLoadBalance=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     username: root
-    password: 123456
+    password: root
     filters: stat
     #最大并发链接数
     maxActive: 20

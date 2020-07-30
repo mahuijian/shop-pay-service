@@ -6,6 +6,7 @@ import com.mhj.entity.PaymentTransactionDTO;
 import com.mhj.mapper.PaymentTransactionDao;
 import com.mhj.utils.JwtUtil;
 import com.mhj.utils.OrderCodeUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Map;
  * @date 2019-09-02 14:15
  */
 @Service
+@Slf4j
 public class PaymentTransactionService {
 
     private PaymentTransactionDao paymentTransactionDao;
