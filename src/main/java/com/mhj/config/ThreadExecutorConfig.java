@@ -40,7 +40,7 @@ public class ThreadExecutorConfig {
      * 返回值类型为<bean></bean>中的属性"class"对应的value
      * 方法名为<bean></bean>中的属性"id"对应的value
      */
-    @Bean
+    @Bean(name = "executorService")
     public ExecutorService fxbDrawExecutor() {
         log.info("start executor testExecutor ");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
